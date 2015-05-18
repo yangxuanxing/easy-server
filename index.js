@@ -16,9 +16,9 @@ function createServer(config){
     config = config || {};
     var assetPath = config.assetPath || './';
 
-    var server = http.createServer(function(request, response) {
+    return http.createServer(function(request, response) {
         var pathname = url.parse(request.url).pathname.replace(/^\//, '') || 'index.html';
-        var realPath = path.resolve(config.assetPath, pathname);
+        var realPath = path.resolve(assetPath, pathname);
         var ext = path.extname(realPath);
         ext = ext ? ext.slice(1) : 'unknown';
         fs.exists(realPath, function(exists) {
