@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var mine = require('./mine.json');
 
-var config = process.env._easyMock || {};
+var config = process.env._easyServer || {};
 var ASSET_PATH = config.assetPath || './';
 var para = process.argv[2];
 if(para == '-p'){
