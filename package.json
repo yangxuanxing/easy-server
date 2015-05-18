@@ -1,6 +1,6 @@
 {
   "name": "easy-node-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "easily create a local server,support jsonp request",
   "keywords": ["easy","easily","server","jsonp","simply"],
   "email": "yangxuanxing@gmail.com",
