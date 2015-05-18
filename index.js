@@ -2,7 +2,7 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var path = require('path');
-var mine = require('./mine.json');
+var mine = require('./lib/mine.json');
 
 function getPara(url, paraName){
     var reg = new RegExp(paraName + '=(\\w+)');
