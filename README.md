@@ -2,7 +2,7 @@
 
 1. 安装
 
-		npm install easy-server
+		npm install easy-node-server
 	
 	或者
 	
