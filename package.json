@@ -1,5 +1,5 @@
 {
-  "name": "easy-server",
+  "name": "easy-node-server",
   "version": "1.0.0",
   "description": "easily create a local server,support jsonp request",
   "keywords": ["easy","easily","server","jsonp","simply"],
