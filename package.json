@@ -1,11 +1,20 @@
 {
   "name": "easy-node-server",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "easily create a local server,support jsonp request",
-  "keywords": ["easy","easily","server","jsonp","simply"],
+  "keywords": [
+    "easy",
+    "easily",
+    "server",
+    "jsonp",
+    "simply"
+  ],
   "email": "yangxuanxing@gmail.com",
   "repository": {
     "type": "git",
     "url": "git@github.com:518yxx/easy-server.git"
+  },
+  "dependencies": {
+    "yargs": "^6.6.0"
   }
 }
