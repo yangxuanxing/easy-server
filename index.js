@@ -41,7 +41,7 @@ function createServer(config){
                 response.writeHead(404, {
                     'Content-Type': mine.txt
                 });
-                response.write(pathname + ' was not found on this server.');
+                response.write(realPath + ' was not found on this server.');
                 response.end();
                 return;
             }
@@ -51,7 +51,7 @@ function createServer(config){
                     response.writeHead(500, {
                         'Content-Type': mine.txt
                     });
-                    response.end('Cannot open ' + pathname);
+                    response.end('Cannot open ' + realPath);
                 } else {
                     var callback = getPara(request.url, 'callback');
                     var contentType = mine[ext] || mine.txt;
