@@ -2,7 +2,6 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var path = require('path');
-var argv = require('yargs').argv;
 var mine = require('./lib/mine.json');
 
 function getPara(url, paraName){
@@ -18,6 +17,8 @@ function createServer(config){
     var assetPath = config.assetPath || path.resolve(__dirname, 'assets');
 
     return http.createServer(function(request, response) {
+        console.log('---------------request from-----------------');
+        console.log(request.url);
         var pathname = url.parse(request.url).pathname.replace(/^\//, '') || 'index.html';
         var realPath = path.resolve(assetPath, pathname);
         var ext = path.extname(realPath);
@@ -64,10 +65,3 @@ module.exports.start = function(config){
     config = config || {};
     createServer(config).listen(config.port || 4444);
 }
-
-if(module.parent){
-    return;
-}
-
-var port = argv.p || 4444;
-var server = createServer({assetPath: argv.f}).listen(port);

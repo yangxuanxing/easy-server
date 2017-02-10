@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+var argv = require('yargs').argv;
+var easyServer = require('../index.js');
+
+easyServer.start({
+	port: argv.p || 4444,
+	assetPath: argv.f
+});
