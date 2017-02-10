@@ -63,5 +63,7 @@ function createServer(config){
 
 module.exports.start = function(config){
     config = config || {};
-    createServer(config).listen(config.port || 4444);
+    createServer(config).listen(config.port || 4444, function(){
+        console.log(`服务启动成功，可以用浏览器访问：http://localhost:${config.port || 4444} 确认\n`);
+    });
 }
