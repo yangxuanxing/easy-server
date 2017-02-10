@@ -17,46 +17,62 @@ function createServer(config){
     var assetPath = config.assetPath || path.resolve(__dirname, 'assets');
 
     return http.createServer(function(request, response) {
+        // support CORS
+        response.setHeader('Access-Control-Allow-Origin', `${request.headers.origin || "*"}`);
+        response.setHeader('Access-Control-Allow-Credentials', 'true');
+        if(request.method === 'OPTIONS'){
+            response.setHeader('Access-Control-Allow-Methods', '*');
+            response.setHeader('Access-Control-Allow-Headers', 'Content-Type,x-requested-with,*');
+            response.setHeader('Access-Control-Max-Age', '86400');
+            response.writeHead(200);
+            response.end();
+            return;
+        }
+
         console.log('---------------request from-----------------');
         console.log(request.url);
         var pathname = url.parse(request.url).pathname.replace(/^\//, '') || 'index.html';
         var realPath = path.resolve(assetPath, pathname);
         var ext = path.extname(realPath);
         ext = ext ? ext.slice(1) : 'unknown';
+
         fs.exists(realPath, function(exists) {
             if (!exists) {
                 response.writeHead(404, {
-                    'Content-Type': 'text/plain'
+                    'Content-Type': mine.txt
                 });
                 response.write(pathname + ' was not found on this server.');
                 response.end();
-            } else {
-                fs.readFile(realPath, 'binary', function(err, file) {
-                    if (err) {
-                        response.writeHead(500, {
-                            'Content-Type': 'text/plain'
-                        });
-                        response.end('Cannot open ' + pathname);
-                    } else {
-                        var callback;
-                        var contentType = mine[ext] || 'text/plain';
-                        response.writeHead(200, {
-                            'Content-Type': contentType
-                        });
-                        if(ext == 'json'){
-                            callback = getPara(request.url, 'callback');
-                            if(callback){
-                                response.write(callback + '(');
-                            }
-                        }
-                        response.write(file, 'binary');
-                        if(callback){
-                            response.write(')');
-                        }
-                        response.end();
-                    }
-                });
+                return;
             }
+
+            fs.readFile(realPath, 'binary', function(err, file) {
+                if (err) {
+                    response.writeHead(500, {
+                        'Content-Type': mine.txt
+                    });
+                    response.end('Cannot open ' + pathname);
+                } else {
+                    var callback = getPara(request.url, 'callback');
+                    var contentType = mine[ext] || mine.txt;
+
+                    if(ext == 'json' && callback){
+                        contentType = mine.js;
+                    }
+                    response.writeHead(200, {
+                        'Content-Type': contentType
+                    });
+
+                    if(ext == 'json' && callback){
+                        response.write(callback + '(');
+                    }
+                    response.write(file, 'binary');
+                    if(ext == 'json' && callback){
+                        response.write(')');
+                    }
+                    response.end();
+                }
+            });
         });
     });
 };

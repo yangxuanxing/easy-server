@@ -1,6 +1,6 @@
 {
   "name": "easy-node-server",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "easily create a local file server,support jsonp request",
   "keywords": [
     "easy",
